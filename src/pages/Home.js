@@ -5,6 +5,7 @@ import UpdateTask from "../components/UpdateTask/UpdateTask";
 import ListItemTask from "../components/Tasks/ListItemTask";
 import NewTask from "../components/NewTask/Newtask";
 
+
 const Home = () => {
     const [tasks, setTasks] = useState([]);
     const [displayForm, setDisplayForm] = useState(false);
@@ -13,8 +14,11 @@ const Home = () => {
     const [enteredDescription, setEnteredDescription] = useState('');
     const [enteredDate, setEnteredDate] = useState('');
     const [taskId, setTaskId] = useState(null);
+    const [Loading,setLoading] =useState(false)
+
 
     useEffect(() => {
+        setLoading(true)
         const q = query(collection(db, 'tasks'));
         onSnapshot(q, (querySnapshot) => {
             setTasks(querySnapshot.docs.map(doc => ({
@@ -22,11 +26,14 @@ const Home = () => {
                 data: doc.data()
             })))
         });
+        setLoading(false)
     }, []);
+
 
     const displayFormTask = () => {
         setDisplayForm(prevDisplayForm => !prevDisplayForm)
     }
+
 
     const displayModalTask = () => {
         setDisplayModal(prevDisplayModal => !prevDisplayModal)
@@ -35,6 +42,7 @@ const Home = () => {
     const titleChangeHandler = (event) => {
         setEnteredTitle(event.target.value);
     };
+
 
     const descriptionChangeHandler = (event) => {
         setEnteredDescription(event.target.value);
@@ -46,6 +54,7 @@ const Home = () => {
 
 
     const handleSubmit = async (e) => {
+        setLoading(true)
         e.preventDefault()
         try {
             await addDoc(collection(db, 'tasks'), {
@@ -53,6 +62,7 @@ const Home = () => {
                 description: enteredDescription,
                 date: new Date(enteredDate),
             })
+        setLoading(false)
             setEnteredTitle('');
             setEnteredDescription('');
             setEnteredDate('')
@@ -121,6 +131,7 @@ const Home = () => {
                 handles={{ titleChangeHandler, descriptionChangeHandler, dateChangeHandler }}
                 displayFormTask={displayFormTask}
                 displayForm={displayForm}
+                Loading={Loading}
             />
 
             <ListItemTask
@@ -129,6 +140,8 @@ const Home = () => {
                 displayModalTask={displayModalTask}
                 displayFormTask={displayFormTask}
                 getDocById={getDocById}
+                Loading={Loading}
+               
             />
         </div>
     )

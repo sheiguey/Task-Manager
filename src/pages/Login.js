@@ -2,22 +2,28 @@ import React, { useState } from "react";
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from "../firebase";
 import { NavLink, useNavigate } from "react-router-dom";
+import Preload from "../components/loader/preloader";
 import './login.css';
 
 const Login = ({authentification}) => {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
+  const [Loading,setLoading] =useState(false)
   
   const navigate = useNavigate();
 
   const onLogin = (e) => {
+
     e.preventDefault();
+    setLoading(true);
     signInWithEmailAndPassword(auth, Email, Password)
       .then(() => {
         authentification()
+        setLoading(false)
         navigate("/home");
       })
       .catch((error) => {
+        setLoading(false)
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage)
@@ -70,6 +76,9 @@ const Login = ({authentification}) => {
             className="form-btn"
           >
             Login
+            {
+              Loading===true &&  <Preload/>
+            }
           </button>
         </div>
       </form>

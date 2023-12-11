@@ -1,7 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
+import Preload from '../loader/preloader';
 
-
-const NewTaskForm = ({handleSubmit,inputs,handles,displayFormTask}) => {
+const NewTaskForm = ({handleSubmit,inputs,handles,displayFormTask,Loading}) => {
+ 
   return (
       <form onSubmit={handleSubmit}>
         <div className='new-task__controls'>
@@ -34,7 +35,7 @@ const NewTaskForm = ({handleSubmit,inputs,handles,displayFormTask}) => {
           </div>
         </div>
         <div className='new-task__actions'>
-          <button type='submit'>Add task</button>
+          <button type='submit'>Add task{Loading===true  && <Preload/>}</button>
           <button type='button' onClick={()=>displayFormTask()}>close</button>
         </div>
       </form>

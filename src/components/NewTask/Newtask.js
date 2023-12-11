@@ -3,7 +3,7 @@ import NewTaskButton from "./NewTaskButton";
 import NewTaskForm from "./NewTaskForm";
 import './NewTask.css';
 
-const NewTask= ({handleSubmit,inputs,handles,displayForm,displayFormTask})=>{
+const NewTask= ({handleSubmit,inputs,handles,displayForm,displayFormTask,Loading})=>{
     return(
         <div className="new-task_container">
           {
@@ -14,6 +14,7 @@ const NewTask= ({handleSubmit,inputs,handles,displayForm,displayFormTask})=>{
             inputs={inputs}
             handles={handles}
             displayFormTask={displayFormTask}
+            Loading={Loading}
           />
           }  
 
