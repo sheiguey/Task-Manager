@@ -2,7 +2,7 @@ import React from "react";
 import TaskItem from "./TaskItem";
 import './ListItemTask.css'
 import Card from "../../UI/Card";
-import Preload from "../loader/preloader";
+
 
 const ListItemTask =({data,deleteTask,displayModalTask,getDocById,displayFormTask})=>{
     
@@ -23,7 +23,7 @@ const ListItemTask =({data,deleteTask,displayModalTask,getDocById,displayFormTas
                         getDocById={getDocById}
                         displayFormTask={displayFormTask}
                      /> 
-                  )):<Preload/>
+                  )):<p>loading...</p>
                }
             </ul>
          </Card>
