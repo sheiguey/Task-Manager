@@ -4,7 +4,7 @@ import './ListItemTask.css'
 import Card from "../../UI/Card";
 import Preload from "../loader/preloader";
 
-const ListItemTask =({data,deleteTask,displayModalTask,getDocById,displayFormTask,Loading})=>{
+const ListItemTask =({data,deleteTask,displayModalTask,getDocById,displayFormTask})=>{
     
    return(
        <div>

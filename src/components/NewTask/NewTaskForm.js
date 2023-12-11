@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import Preload from '../loader/preloader';
 
 const NewTaskForm = ({handleSubmit,inputs,handles,displayFormTask,Loading}) => {
